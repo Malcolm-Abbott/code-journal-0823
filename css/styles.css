@@ -3,3 +3,16 @@ header {
   color: #ffff;
   box-shadow: 0 1px 1px darkgrey;
 }
+
+.img-wrapper > img {
+  width: 100%;
+}
+
+.textarea-wrapper {
+  min-height: 10rem;
+  display: flex;
+}
+
+.textarea-wrapper > textarea {
+  flex-basis: 100%;
+}

@@ -26,7 +26,50 @@
       </div>
     </header>
     <main class="container">
-      <div data-view="entry-form"></div>
+      <div data-view="entry-form">
+        <form>
+          <div class="row">
+            <div class="column-full">
+              <h1>New Entry</h1>
+            </div>
+          </div>
+          <div class="row">
+            <div class="column-half">
+              <div class="img-wrapper">
+                <img src="./images/placeholder-image-square.jpg" />
+              </div>
+            </div>
+            <div class="input-container">
+              <div class="column-half">
+                <div class="label-wrapper">
+                  <label for="title">Title</label>
+                </div>
+                <div class="input-wrapper">
+                  <input type="text" id="title" name="title" />
+                </div>
+              </div>
+              <div class="column-half">
+                <div class="label-wrapper">
+                  <label for="photo">Photo URL</label>
+                </div>
+                <div class="input-wrapper">
+                  <input type="text" id="photo" name="photo" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="column-full">
+              <div class="label-wrapper">
+                <label for="notes">Notes</label>
+              </div>
+              <div class="textarea-wrapper">
+                <textarea id="notes" name="notes"> </textarea>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
       <div data-view="entries" class="hidden"></div>
     </main>
     <script src="js/data.js"></script>
