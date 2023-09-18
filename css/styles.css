@@ -1,7 +1,15 @@
+body {
+  background-color: rgb(238, 238, 238);
+}
+
 header {
   background-color: rgb(76, 36, 116);
   color: #ffff;
   box-shadow: 0 1px 1px darkgrey;
+}
+
+.img-wrapper {
+  margin-bottom: 2rem;
 }
 
 .img-wrapper > img {
@@ -17,6 +25,7 @@ header {
 .input-wrapper {
   display: flex;
   margin-bottom: 2rem;
+  margin-top: 1rem;
 }
 
 .input-wrapper > input {
@@ -29,6 +38,8 @@ header {
 .textarea-wrapper {
   min-height: 10rem;
   display: flex;
+  margin-bottom: 2rem;
+  margin-top: 1rem;
 }
 
 .textarea-wrapper > textarea {
@@ -48,8 +59,4 @@ header {
   border-radius: 0.25rem;
   font-size: 1.25rem;
   padding: 0.65rem;
-}
-
-div {
-  padding-bottom: 0.5rem;
 }
