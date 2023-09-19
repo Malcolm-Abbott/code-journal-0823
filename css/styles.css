@@ -14,6 +14,7 @@ header {
 
 .img-wrapper > img {
   width: 100%;
+  border-radius: 0.25rem;
 }
 
 .label-wrapper,
@@ -59,4 +60,36 @@ header {
   border-radius: 0.25rem;
   font-size: 1.25rem;
   padding: 0.65rem;
+}
+
+li {
+  list-style: none;
+}
+
+.entries-title {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.entries-title > h1 {
+  margin: 0;
+}
+
+div[data-view='entries'] > ul {
+  padding-inline-start: 0;
+}
+
+.create-link {
+  background-color: rgb(76, 36, 118);
+  color: #ffff;
+  border-radius: 0.25rem;
+  padding: 0.25rem 0.75rem;
+  font-weight: 600;
+  font-family: inherit;
+  font-size: 1.05rem;
+}
+
+div[data-view='entries'] .img-wrapper {
+  margin-bottom: 0;
 }

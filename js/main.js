@@ -20,3 +20,8 @@ $form.addEventListener('submit', (event) => {
   $imgCreate.setAttribute('src', './images/placeholder-image-square.jpg');
   $form.reset();
 });
+
+const $entry = document.querySelector('div[data-view="entry-form"]');
+const $entries = document.querySelector('div[data-view="entries"]');
+$entry.classList.add('hidden');
+$entries.classList.remove('hidden');
