@@ -1,6 +1,6 @@
 const $photo = document.querySelector('#photo');
+const $imgCreate = document.querySelector('.create');
 $photo.addEventListener('input', (event) => {
-  const $imgCreate = document.querySelector('.create');
   $imgCreate.setAttribute('src', $photo.value);
 });
 
@@ -14,5 +14,9 @@ $form.addEventListener('submit', (event) => {
     photo: $photo.value,
     notes: $notes.value,
   };
-  values.deleteThis = 'BEFORE CONTINUING';
+  values.entryId = data.nextEntryId;
+  data.nextEntryId++;
+  data.entries.unshift(values);
+  $imgCreate.setAttribute('src', './images/placeholder-image-square.jpg');
+  $form.reset();
 });
