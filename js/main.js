@@ -83,4 +83,12 @@ function viewSwap(view) {
   }
 }
 
-viewSwap('entry-form');
+const $entriesTab = document.querySelector('.entries-tab');
+$entriesTab.addEventListener('click', (event) => {
+  viewSwap('entries');
+});
+
+const $entryFormTab = document.querySelector('.entry-form-tab');
+$entryFormTab.addEventListener('click', (event) => {
+  viewSwap('entry-form');
+});

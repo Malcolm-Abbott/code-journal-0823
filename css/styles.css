@@ -64,12 +64,15 @@ header {
 
 li {
   list-style: none;
+  padding-inline-start: 0.75rem;
 }
 
 .entries-title {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 2rem;
+  align-items: center;
+  margin-bottom: 1.25rem;
+  margin-top: 1.5rem;
 }
 
 .entries-title > h1 {
@@ -80,14 +83,14 @@ div[data-view='entries'] ul {
   padding-inline-start: 0;
 }
 
-.create-link {
+.entry-form-tab {
   background-color: rgb(76, 36, 118);
   color: #ffff;
   border-radius: 0.25rem;
-  padding: 0.25rem 0.75rem;
+  padding: 0.5rem 1rem;
   font-weight: 600;
-  font-family: inherit;
   font-size: 1.05rem;
+  cursor: pointer;
 }
 
 div[data-view='entries'] .img-wrapper {
@@ -96,4 +99,10 @@ div[data-view='entries'] .img-wrapper {
 
 div[data-view='entries'] > .no-entries {
   text-align: center;
+}
+
+.entries-tab {
+  font-size: 1.5rem;
+  padding-inline-start: 0.75rem;
+  cursor: pointer;
 }
