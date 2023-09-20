@@ -76,7 +76,7 @@ li {
   margin: 0;
 }
 
-div[data-view='entries'] > ul {
+div[data-view='entries'] ul {
   padding-inline-start: 0;
 }
 
@@ -92,4 +92,8 @@ div[data-view='entries'] > ul {
 
 div[data-view='entries'] .img-wrapper {
   margin-bottom: 0;
+}
+
+div[data-view='entries'] > .no-entries {
+  text-align: center;
 }
