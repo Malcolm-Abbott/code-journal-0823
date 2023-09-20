@@ -52,4 +52,9 @@ function renderEntry(entry) {
   return $li;
 }
 
-renderEntry(data.entries[0]);
+document.addEventListener('DOMContentLoaded', (event) => {
+  data.entries.forEach((element) => {
+    const $ul = document.querySelector('ul');
+    $ul.append(renderEntry(element));
+  });
+});
