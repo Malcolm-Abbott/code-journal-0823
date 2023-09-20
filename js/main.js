@@ -58,3 +58,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
     $ul.append(renderEntry(element));
   });
 });
+
+function toggleNoEntries() {
+  const $noEntries = document.querySelector('.no-entries');
+  $noEntries.classList.toggle('hidden');
+}
+
+toggleNoEntries();
