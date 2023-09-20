@@ -4,6 +4,7 @@ $photo.addEventListener('input', (event) => {
   $imgCreate.setAttribute('src', $photo.value);
 });
 
+const $ul = document.querySelector('ul');
 const $form = document.querySelector('form');
 $form.addEventListener('submit', (event) => {
   event.preventDefault();
@@ -18,6 +19,9 @@ $form.addEventListener('submit', (event) => {
   data.nextEntryId++;
   data.entries.unshift(values);
   $imgCreate.setAttribute('src', './images/placeholder-image-square.jpg');
+  $ul.prepend(renderEntry(values));
+  viewSwap('entries');
+  if (data.entries) toggleNoEntries();
   $form.reset();
 });
 
@@ -54,7 +58,6 @@ function renderEntry(entry) {
 
 document.addEventListener('DOMContentLoaded', (event) => {
   data.entries.forEach((element) => {
-    const $ul = document.querySelector('ul');
     $ul.append(renderEntry(element));
   });
 });
@@ -63,8 +66,6 @@ function toggleNoEntries() {
   const $noEntries = document.querySelector('.no-entries');
   $noEntries.classList.toggle('hidden');
 }
-
-toggleNoEntries();
 
 function viewSwap(view) {
   const $entry = document.querySelector('div[data-view="entry-form"]');
