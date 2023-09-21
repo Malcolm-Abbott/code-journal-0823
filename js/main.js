@@ -21,7 +21,7 @@ $form.addEventListener('submit', (event) => {
   $imgCreate.setAttribute('src', './images/placeholder-image-square.jpg');
   $ul.prepend(renderEntry(values));
   viewSwap('entries');
-  if (data.entries.length > 0 && $noEntries.className !== 'hidden')
+  if (data.entries.length > 0 && $noEntries.className !== 'no-entries hidden')
     toggleNoEntries();
   $form.reset();
 });
@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     $ul.append(renderEntry(element));
   });
   viewSwap(data.view);
-  if (data.entries.length > 0 && $noEntries.className !== 'hidden')
+  if (data.entries.length > 0 && $noEntries.className !== 'no-entries hidden')
     toggleNoEntries();
 });
 
