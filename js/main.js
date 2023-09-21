@@ -5,11 +5,31 @@ $photo.addEventListener('input', (event) => {
 });
 
 const $ul = document.querySelector('ul');
+$ul.addEventListener('click', (event) => {
+  if (event.target.matches('I')) {
+    viewSwap('entry-form');
+    const $newEditEntry = document.querySelector('.new-edit-entry');
+    $newEditEntry.textContent = 'Edit Entry';
+    const liEntryId = +event.target.closest('li').getAttribute('data-entry-id');
+    for (let i = 0; i < data.entries.length; i++) {
+      const entryId = data.entries[i].entryId;
+      const result = entryId === liEntryId;
+      if (result) {
+        data.editing = data.entries[i];
+        $title.value = data.editing.title;
+        $photo.value = data.editing.photo;
+        $notes.value = data.editing.notes;
+        $imgCreate.setAttribute('src', data.editing.photo);
+      }
+    }
+  }
+});
+
+const $title = document.querySelector('#title');
+const $notes = document.querySelector('#notes');
 const $form = document.querySelector('form');
 $form.addEventListener('submit', (event) => {
   event.preventDefault();
-  const $title = document.querySelector('#title');
-  const $notes = document.querySelector('#notes');
   const values = {
     title: $title.value,
     photo: $photo.value,

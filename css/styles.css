@@ -113,3 +113,7 @@ div[data-view='entries'] > .no-entries {
   justify-content: space-between;
   align-items: center;
 }
+
+i.fa-solid {
+  cursor: pointer;
+}
