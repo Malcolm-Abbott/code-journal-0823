@@ -107,3 +107,9 @@ div[data-view='entries'] > .no-entries {
   padding-inline-start: 0.75rem;
   cursor: pointer;
 }
+
+.h3-pencil-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

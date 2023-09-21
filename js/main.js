@@ -28,6 +28,7 @@ $form.addEventListener('submit', (event) => {
 
 function renderEntry(entry) {
   const $li = document.createElement('li');
+  $li.setAttribute('data-entry-id', entry.entryId);
   const $row = document.createElement('div');
   $row.className = 'row';
   $li.append($row);
@@ -43,9 +44,15 @@ function renderEntry(entry) {
   const $half2 = document.createElement('div');
   $half2.className = 'column-half';
   $row.append($half2);
+  const $h3PencilContainer = document.createElement('div');
+  $h3PencilContainer.className = 'h3-pencil-container';
+  $half2.append($h3PencilContainer);
   const $h3 = document.createElement('h3');
   $h3.textContent = entry.title;
-  $half2.append($h3);
+  $h3PencilContainer.append($h3);
+  const $iPencil = document.createElement('i');
+  $iPencil.className = 'fa-solid fa-pencil';
+  $h3PencilContainer.append($iPencil);
   const $p = document.createElement('p');
   $p.textContent = entry.notes;
   $half2.append($p);
