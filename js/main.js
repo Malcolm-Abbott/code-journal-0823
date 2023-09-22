@@ -4,11 +4,11 @@ $photo.addEventListener('input', (event) => {
   $imgCreate.setAttribute('src', $photo.value);
 });
 
+const $newEditEntry = document.querySelector('.new-edit-entry');
 const $ul = document.querySelector('ul');
 $ul.addEventListener('click', (event) => {
   if (event.target.matches('I')) {
     viewSwap('entry-form');
-    const $newEditEntry = document.querySelector('.new-edit-entry');
     $newEditEntry.textContent = 'Edit Entry';
     const liEntryId = +event.target.closest('li').getAttribute('data-entry-id');
     for (let i = 0; i < data.entries.length; i++) {
@@ -35,11 +35,28 @@ $form.addEventListener('submit', (event) => {
     photo: $photo.value,
     notes: $notes.value,
   };
-  values.entryId = data.nextEntryId;
-  data.nextEntryId++;
-  data.entries.unshift(values);
-  $imgCreate.setAttribute('src', './images/placeholder-image-square.jpg');
-  $ul.prepend(renderEntry(values));
+  if (data.editing === null) {
+    values.entryId = data.nextEntryId++;
+    data.entries.unshift(values);
+    $imgCreate.setAttribute('src', './images/placeholder-image-square.jpg');
+    $ul.prepend(renderEntry(values));
+  } else {
+    values.entryId = data.editing.entryId;
+    for (let i = 0; i < data.entries.length; i++) {
+      if (data.entries[i].entryId === values.entryId) {
+        data.entries[i] = values;
+      }
+    }
+    const $liNodeList = document.querySelectorAll('li');
+    let $replaceLi;
+    $liNodeList.forEach((element) => {
+      if (+element.getAttribute('data-entry-id') === data.editing.entryId)
+        $replaceLi = element;
+    });
+    $newEditEntry.textContent = 'New Entry';
+    $replaceLi.replaceWith(renderEntry(values));
+    data.editing = null;
+  }
   viewSwap('entries');
   if (data.entries.length > 0 && $noEntries.className !== 'no-entries hidden')
     toggleNoEntries();
