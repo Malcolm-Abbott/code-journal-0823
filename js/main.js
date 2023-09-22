@@ -135,6 +135,9 @@ const $entriesTab = document.querySelector('.entries-tab');
 $entriesTab.addEventListener('click', (event) => {
   viewSwap('entries');
   data.editing = null;
+  $title.value = '';
+  $photo.value = '';
+  $notes.value = '';
   $newEditEntry.textContent = 'New Entry';
 });
 
@@ -174,6 +177,10 @@ $modalContentContainer.addEventListener('click', (event) => {
       $replaceLi.remove();
       $modalContainer.classList.toggle('hidden');
       data.editing = null;
+      $title.value = '';
+      $photo.value = '';
+      $notes.value = '';
+      $newEditEntry.textContent = 'New Entry';
       viewSwap('entries');
       if (
         data.entries.length > 0 &&
