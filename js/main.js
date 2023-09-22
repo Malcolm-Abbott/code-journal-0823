@@ -4,22 +4,59 @@ $photo.addEventListener('input', (event) => {
   $imgCreate.setAttribute('src', $photo.value);
 });
 
+const $newEditEntry = document.querySelector('.new-edit-entry');
 const $ul = document.querySelector('ul');
+$ul.addEventListener('click', (event) => {
+  if (event.target.matches('I')) {
+    viewSwap('entry-form');
+    $newEditEntry.textContent = 'Edit Entry';
+    const liEntryId = +event.target.closest('li').getAttribute('data-entry-id');
+    for (let i = 0; i < data.entries.length; i++) {
+      const entryId = data.entries[i].entryId;
+      const result = entryId === liEntryId;
+      if (result) {
+        data.editing = data.entries[i];
+        $title.value = data.editing.title;
+        $photo.value = data.editing.photo;
+        $notes.value = data.editing.notes;
+        $imgCreate.setAttribute('src', data.editing.photo);
+      }
+    }
+  }
+});
+
+const $title = document.querySelector('#title');
+const $notes = document.querySelector('#notes');
 const $form = document.querySelector('form');
 $form.addEventListener('submit', (event) => {
   event.preventDefault();
-  const $title = document.querySelector('#title');
-  const $notes = document.querySelector('#notes');
   const values = {
     title: $title.value,
     photo: $photo.value,
     notes: $notes.value,
   };
-  values.entryId = data.nextEntryId;
-  data.nextEntryId++;
-  data.entries.unshift(values);
-  $imgCreate.setAttribute('src', './images/placeholder-image-square.jpg');
-  $ul.prepend(renderEntry(values));
+  if (data.editing === null) {
+    values.entryId = data.nextEntryId++;
+    data.entries.unshift(values);
+    $imgCreate.setAttribute('src', './images/placeholder-image-square.jpg');
+    $ul.prepend(renderEntry(values));
+  } else {
+    values.entryId = data.editing.entryId;
+    for (let i = 0; i < data.entries.length; i++) {
+      if (data.entries[i].entryId === values.entryId) {
+        data.entries[i] = values;
+      }
+    }
+    const $liNodeList = document.querySelectorAll('li');
+    let $replaceLi;
+    $liNodeList.forEach((element) => {
+      if (+element.getAttribute('data-entry-id') === data.editing.entryId)
+        $replaceLi = element;
+    });
+    $newEditEntry.textContent = 'New Entry';
+    $replaceLi.replaceWith(renderEntry(values));
+    data.editing = null;
+  }
   viewSwap('entries');
   if (data.entries.length > 0 && $noEntries.className !== 'no-entries hidden')
     toggleNoEntries();
@@ -28,6 +65,7 @@ $form.addEventListener('submit', (event) => {
 
 function renderEntry(entry) {
   const $li = document.createElement('li');
+  $li.setAttribute('data-entry-id', entry.entryId);
   const $row = document.createElement('div');
   $row.className = 'row';
   $li.append($row);
@@ -43,9 +81,15 @@ function renderEntry(entry) {
   const $half2 = document.createElement('div');
   $half2.className = 'column-half';
   $row.append($half2);
+  const $h3PencilContainer = document.createElement('div');
+  $h3PencilContainer.className = 'h3-pencil-container';
+  $half2.append($h3PencilContainer);
   const $h3 = document.createElement('h3');
   $h3.textContent = entry.title;
-  $half2.append($h3);
+  $h3PencilContainer.append($h3);
+  const $iPencil = document.createElement('i');
+  $iPencil.className = 'fa-solid fa-pencil';
+  $h3PencilContainer.append($iPencil);
   const $p = document.createElement('p');
   $p.textContent = entry.notes;
   $half2.append($p);
