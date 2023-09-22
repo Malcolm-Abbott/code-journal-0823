@@ -57,8 +57,8 @@ $form.addEventListener('submit', (event) => {
     });
     $newEditEntry.textContent = 'New Entry';
     $replaceLi.replaceWith(renderEntry(values));
-    data.editing = null;
     $deleteButton.classList.add('hidden');
+    data.editing = null;
   }
   viewSwap('entries');
   if (data.entries.length > 0 && $noEntries.className !== 'no-entries hidden')
@@ -134,6 +134,8 @@ function viewSwap(view) {
 const $entriesTab = document.querySelector('.entries-tab');
 $entriesTab.addEventListener('click', (event) => {
   viewSwap('entries');
+  data.editing = null;
+  $newEditEntry.textContent = 'New Entry';
 });
 
 const $entryFormTab = document.querySelector('.entry-form-tab');
@@ -152,10 +154,32 @@ const $modalContentContainer = document.querySelector(
 const $cancel = document.querySelector('.cancel');
 const $confirm = document.querySelector('.confirm');
 $modalContentContainer.addEventListener('click', (event) => {
+  const updatedDataEntries = [];
+  const $liNodeList = document.querySelectorAll('li');
+  let $replaceLi;
   switch (event.target) {
     case $cancel:
       $modalContainer.classList.toggle('hidden');
       break;
     case $confirm:
+      for (let i = 0; i < data.entries.length; i++) {
+        if (data.entries[i].entryId !== data.editing.entryId)
+          updatedDataEntries.push(data.entries[i]);
+      }
+      data.entries = updatedDataEntries;
+      $liNodeList.forEach((element) => {
+        if (+element.getAttribute('data-entry-id') === data.editing.entryId)
+          $replaceLi = element;
+      });
+      $replaceLi.remove();
+      $modalContainer.classList.toggle('hidden');
+      data.editing = null;
+      viewSwap('entries');
+      if (
+        data.entries.length > 0 &&
+        $noEntries.className !== 'no-entries hidden'
+      )
+        toggleNoEntries();
+      break;
   }
 });

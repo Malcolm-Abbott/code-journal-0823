@@ -134,7 +134,8 @@ i.fa-solid {
 }
 
 .modal-container {
-  position: absolute;
+  position: fixed;
+  height: 100vh;
   top: 0;
   right: 0;
   bottom: 0;
