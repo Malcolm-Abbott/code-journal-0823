@@ -140,3 +140,8 @@ const $entryFormTab = document.querySelector('.entry-form-tab');
 $entryFormTab.addEventListener('click', (event) => {
   viewSwap('entry-form');
 });
+
+const $modalContainer = document.querySelector('.modal-container');
+$deleteButton.addEventListener('click', (event) => {
+  $modalContainer.classList.toggle('hidden');
+});
