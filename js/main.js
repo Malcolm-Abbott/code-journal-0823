@@ -145,3 +145,17 @@ const $modalContainer = document.querySelector('.modal-container');
 $deleteButton.addEventListener('click', (event) => {
   $modalContainer.classList.toggle('hidden');
 });
+
+const $modalContentContainer = document.querySelector(
+  '.modal-content-container'
+);
+const $cancel = document.querySelector('.cancel');
+const $confirm = document.querySelector('.confirm');
+$modalContentContainer.addEventListener('click', (event) => {
+  switch (event.target) {
+    case $cancel:
+      $modalContainer.classList.toggle('hidden');
+      break;
+    case $confirm:
+  }
+});
