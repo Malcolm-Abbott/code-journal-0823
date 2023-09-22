@@ -117,3 +117,18 @@ div[data-view='entries'] > .no-entries {
 i.fa-solid {
   cursor: pointer;
 }
+
+.duo-button-container {
+  flex-basis: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.delete-button {
+  border: none;
+  text-decoration: underline;
+  color: red;
+  cursor: pointer;
+  font-weight: 600;
+}

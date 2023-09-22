@@ -4,12 +4,14 @@ $photo.addEventListener('input', (event) => {
   $imgCreate.setAttribute('src', $photo.value);
 });
 
+const $deleteButton = document.querySelector('.delete-button');
 const $newEditEntry = document.querySelector('.new-edit-entry');
 const $ul = document.querySelector('ul');
 $ul.addEventListener('click', (event) => {
   if (event.target.matches('I')) {
     viewSwap('entry-form');
     $newEditEntry.textContent = 'Edit Entry';
+    $deleteButton.classList.remove('hidden');
     const liEntryId = +event.target.closest('li').getAttribute('data-entry-id');
     for (let i = 0; i < data.entries.length; i++) {
       const entryId = data.entries[i].entryId;
@@ -56,6 +58,7 @@ $form.addEventListener('submit', (event) => {
     $newEditEntry.textContent = 'New Entry';
     $replaceLi.replaceWith(renderEntry(values));
     data.editing = null;
+    $deleteButton.classList.add('hidden');
   }
   viewSwap('entries');
   if (data.entries.length > 0 && $noEntries.className !== 'no-entries hidden')
