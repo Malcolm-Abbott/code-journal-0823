@@ -4,12 +4,14 @@ $photo.addEventListener('input', (event) => {
   $imgCreate.setAttribute('src', $photo.value);
 });
 
+const $deleteButton = document.querySelector('.delete-button');
 const $newEditEntry = document.querySelector('.new-edit-entry');
 const $ul = document.querySelector('ul');
 $ul.addEventListener('click', (event) => {
   if (event.target.matches('I')) {
     viewSwap('entry-form');
     $newEditEntry.textContent = 'Edit Entry';
+    $deleteButton.classList.remove('hidden');
     const liEntryId = +event.target.closest('li').getAttribute('data-entry-id');
     for (let i = 0; i < data.entries.length; i++) {
       const entryId = data.entries[i].entryId;
@@ -55,6 +57,7 @@ $form.addEventListener('submit', (event) => {
     });
     $newEditEntry.textContent = 'New Entry';
     $replaceLi.replaceWith(renderEntry(values));
+    $deleteButton.classList.add('hidden');
     data.editing = null;
   }
   viewSwap('entries');
@@ -131,9 +134,59 @@ function viewSwap(view) {
 const $entriesTab = document.querySelector('.entries-tab');
 $entriesTab.addEventListener('click', (event) => {
   viewSwap('entries');
+  data.editing = null;
+  $title.value = '';
+  $photo.value = '';
+  $notes.value = '';
+  $newEditEntry.textContent = 'New Entry';
 });
 
 const $entryFormTab = document.querySelector('.entry-form-tab');
 $entryFormTab.addEventListener('click', (event) => {
   viewSwap('entry-form');
+});
+
+const $modalContainer = document.querySelector('.modal-container');
+$deleteButton.addEventListener('click', (event) => {
+  $modalContainer.classList.toggle('hidden');
+});
+
+const $modalContentContainer = document.querySelector(
+  '.modal-content-container'
+);
+const $cancel = document.querySelector('.cancel');
+const $confirm = document.querySelector('.confirm');
+$modalContentContainer.addEventListener('click', (event) => {
+  const updatedDataEntries = [];
+  const $liNodeList = document.querySelectorAll('li');
+  let $replaceLi;
+  switch (event.target) {
+    case $cancel:
+      $modalContainer.classList.toggle('hidden');
+      break;
+    case $confirm:
+      for (let i = 0; i < data.entries.length; i++) {
+        if (data.entries[i].entryId !== data.editing.entryId)
+          updatedDataEntries.push(data.entries[i]);
+      }
+      data.entries = updatedDataEntries;
+      $liNodeList.forEach((element) => {
+        if (+element.getAttribute('data-entry-id') === data.editing.entryId)
+          $replaceLi = element;
+      });
+      $replaceLi.remove();
+      $modalContainer.classList.toggle('hidden');
+      data.editing = null;
+      $title.value = '';
+      $photo.value = '';
+      $notes.value = '';
+      $newEditEntry.textContent = 'New Entry';
+      viewSwap('entries');
+      if (
+        data.entries.length > 0 &&
+        $noEntries.className !== 'no-entries hidden'
+      )
+        toggleNoEntries();
+      break;
+  }
 });
